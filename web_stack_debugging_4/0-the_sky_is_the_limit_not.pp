@@ -1,8 +1,11 @@
-# It allows you to simulate HTTP requests to a web server
-# and check the response.
-exec { 'replace_limit':
-  path    => '/usr/bin:/usr/sbin:/bin',
-  command => 'sed -i "/ULIMIT=/c\ULIMIT=\'-n 4096\'" /etc/default/nginx; service nginx restart',
+#Increase traffic
+
+exec { 'ulimit':
+  command => 'sed -i s/15/2000/ /etc/default/nginx',
+  path    => ['/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/'],
+} ->
+
+exec { 'restart':
+  command => 'sudo service nginx restart',
+  path    => ['/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/'],
 }
-
-
