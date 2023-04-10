@@ -2,4 +2,4 @@
 # comment
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 service nginx restart
-kill "$(pgrep 'nginx' | head -1)"
+sudo sed -i 's,pid /run/nginx.pid,pid /run/nginx.bak,'/etc/nginx/nginx.conf
