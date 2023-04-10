@@ -1,7 +1,8 @@
-#!/usr/bin/env bash
-# Rise the limit for the requests
-exec { 'fixer':
-  command =>  'sed -i "s/15/15000/g" /etc/default/nginx;service nginx restart',
-  path    =>  '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-  onlyif  =>  'test -e /etc/default/nginx',
+# It allows you to simulate HTTP requests to a web server
+# and check the response.
+exec { 'replace_limit':
+  path    => '/usr/bin:/usr/sbin:/bin',
+  command => 'sed -i "/ULIMIT=/c\ULIMIT=\'-n 4096\'" /etc/default/nginx; service nginx restart',
+}
+
 
