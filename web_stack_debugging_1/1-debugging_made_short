@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#Exchanging port 8080 with 80
-ln -sf /etc/nginx/sites-available/default/etc/nginx/sites-enabled/default
+# comment
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 service nginx restart
 kill "$(pgrep 'nginx' | head -1)"
